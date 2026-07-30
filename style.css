@@ -5,7 +5,8 @@
 }
 
 html,body{
-    background-color: orange;
+    min-height: 100vh;
+    background: linear-gradient(225deg, #abc8de 0.000%, #c7c9d8 16.667%, #e5cccf 33.333%, #ffd3c7 50.000%, #ffdbc2 66.667%, #ffe4c0 83.333%, #ffedc3 100.000%);
 }
 
 h1{
