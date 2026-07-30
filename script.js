@@ -44,11 +44,18 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-    container.addEventListener("mousemove",(event)=>{
+    function handleInteraction( x, y ) {
         clearTimeout(animationTimeout);
-        addnewItem(event.pageX, event.pageY);
+        addnewItem(x, y);
+        animationTimeout = setTimeout(startAnimation, 300);
+    }
 
-        animationTimeout = setTimeout(startAnimation,300)
-    })
+    container.addEventListener("mousemove", (event) => {
+        handleInteraction(event.pageX, event.pageY);
+    });
 
+    container.addEventListener("touchmove", (event) => {
+        const touch = event.touches[0];
+        handleInteraction(touch.pageX, touch.pageY);
+    });
 })
