@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded",() => {
     const container = document.querySelector(".items")
     let imageIndex = 1;
     let animationTimeout = null;
+    let lastX = 0;
+    let lastY = 0;
+    const distanceThreshold = 40;
 
     function addnewItem(x , y) {
         const newItem = document.createElement("div");
@@ -44,10 +47,20 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-    function handleInteraction( x, y ) {
-        clearTimeout(animationTimeout);
-        addnewItem(x, y);
-        animationTimeout = setTimeout(startAnimation, 300);
+    function handleInteraction(x, y) {
+        const deltaX = x - lastX;
+        const deltaY = y - lastY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        if (distance > distanceThreshold) {
+            clearTimeout(animationTimeout);
+            addnewItem(x, y);
+
+            lastX = x;
+            lastY = y;
+            
+            animationTimeout = setTimeout(startAnimation, 300);
+        }
     }
 
     container.addEventListener("mousemove", (event) => {
